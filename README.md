@@ -27,6 +27,6 @@ Create a `config.json` file in the project directory with the following structur
 
 ```json
 {
-    "server": "127.0.0.1",
-    "port": 5555
+    "server": "server_ip",
+    "port": port_number
 }
