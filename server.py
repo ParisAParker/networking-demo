@@ -7,31 +7,34 @@ import json
 with open("config.json", 'r') as file:
     config = json.load(file)
 
+# Creating a socket object using IPv4 (AF_INET) and TCP (SOCK_STREAM)
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Load in variables from config.json
 server = config['server']
 port = config['port']
 
-# Bind server and port to the socket
-# The port could be in use for something else
+# Attempting to bind the server's IP address and port to the socket
 try:
     s.bind((server,port))
 except socket.error as e:
-    str(e)
+    print(str(e)) # If an error ocurs, it is converted to a string and printed
 
-# Listening for connections on that port
+# Configuring the socket to listen for incoming connections
+# The argument '2' specifies the maximum number of queued connections
 s.listen(2)
-print("Waiting for a connection, Server Started")
+print("Waiting for a connection, Server Started") # Informing that the server is ready
 
+# Function to handle communication wiht a connected client
 def threaded_client(conn):
     
     reply = ""
-    while True:
+    while True: # Infinite loop to keep the connection alive
         try:
-            data = conn.recv(2048)
-            reply = data.decode("utf-8")
+            data = conn.recv(2048) # Receiving data from the client (up to 2048 bytes)
+            reply = data.decode("utf-8") # Decoding the received data from bytes to a string
 
+            # If no data is received, the client has disconnected
             if not data:
                 print("Disconnected")
                 break
@@ -39,12 +42,19 @@ def threaded_client(conn):
                 print("Received: ", reply)
                 print("Sending: ", reply)
 
+            # Sending the same data back to the client
             conn.sendall(str.encode(reply))
         except:
             break
-    
-while True:
-    conn, addr = s.accept()
-    print("Connected to:", addr)
 
+    print("Lost connection")
+    conn.close()
+
+
+# Main server loop to accept and handle client connections
+while True:
+    conn, addr = s.accept() # Accepting a new connection from a client
+    print("Connected to:", addr) 
+
+    # Starting a new thread to handle the client
     start_new_thread(threaded_client, (conn, ))
