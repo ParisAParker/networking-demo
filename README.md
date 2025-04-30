@@ -22,3 +22,11 @@ The goal is to use this foundation to build a multiplayer game with `pygame`.
 - **Python**: Core programming language.
 - **Socket Library**: For networking and communication.
 - **Pygame**: (Planned) For creating the multiplayer game.
+
+Create a `config.json` file in the project directory with the following structure:
+
+```json
+{
+    "server": "127.0.0.1",
+    "port": 5555
+}
