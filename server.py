@@ -27,7 +27,7 @@ print("Waiting for a connection, Server Started") # Informing that the server is
 
 # Function to handle communication wiht a connected client
 def threaded_client(conn):
-    
+    conn.send(str.encode("Connected"))
     reply = ""
     while True: # Infinite loop to keep the connection alive
         try:

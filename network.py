@@ -16,7 +16,8 @@ class Network:
         self.server = server
         self.port = port
         self.addr = (self.server, self.port)
-        self.connect()
+        self.id = self.connect()
+        print(self.id)
 
     def connect(self):
         try:
@@ -24,3 +25,5 @@ class Network:
             return self.client.recv(2048).decode()
         except:
             pass
+
+n = Network()
