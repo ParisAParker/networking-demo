@@ -22,7 +22,7 @@ except socket.error as e:
 
 # Configuring the socket to listen for incoming connections
 # The argument '2' specifies the maximum number of queued connections
-s.listen(2)
+s.listen(4)
 print("Waiting for a connection, Server Started") # Informing that the server is ready
 
 def make_pos(tup):
@@ -53,8 +53,8 @@ def threaded_client(conn, player):
                     reply = pos[0]
                 else:
                     reply = pos[1]
-                print("Received: ", data)
-                print("Sending: ", reply)
+                # print("Received: ", data)
+                # print("Sending: ", reply)
 
             # Sending the same data back to the client
             conn.sendall(str.encode(make_pos(reply)))
@@ -73,4 +73,5 @@ while True:
 
     # Starting a new thread to handle the client
     start_new_thread(threaded_client, (conn, currentPlayer))
+    print(currentPlayer)
     currentPlayer += 1

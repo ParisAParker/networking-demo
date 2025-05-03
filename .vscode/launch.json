@@ -1,0 +1,20 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        
+        {
+            "name": "Client 1",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/client.py",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Client 2",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/client.py",
+            "console": "integratedTerminal"
+        }
+    ]
+}
