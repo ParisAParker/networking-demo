@@ -30,3 +30,6 @@ Create a `config.json` file in the project directory with the following structur
     "server": "server_ip",
     "port": port_number
 }
+```
+## Resources
+**Socket library documentation**: [Documentation](https://docs.python.org/3/library/socket.html#socket-objects)
